@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', 'UserController@index');
+    Route::get('user/{id}', 'UserController@show');
+
+    Route::get('conta', 'ContaController@index');
+    Route::get('conta/{id}', 'ContaController@show');
+    Route::put('conta/deposito/{id}', 'ContaController@deposito');
+    Route::put('conta/saque/{id}', 'ContaController@saque');
 });
